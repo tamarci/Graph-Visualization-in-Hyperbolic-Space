@@ -1,0 +1,5 @@
+C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles/program.dir
+C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles/glut.dir
+C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles/glew.dir
+C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles/rebuild_cache.dir

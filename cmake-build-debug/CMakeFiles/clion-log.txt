@@ -1,0 +1,4 @@
+"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\Marci\Desktop\prg\prog\grafika1hazi
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug
