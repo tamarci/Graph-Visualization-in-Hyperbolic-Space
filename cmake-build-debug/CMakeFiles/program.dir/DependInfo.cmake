@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/Skeleton.cpp" "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles/program.dir/src/Skeleton.cpp.obj"
-  "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/framework.cpp" "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles/program.dir/src/framework.cpp.obj"
+  "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/Skeleton.cpp" "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/CMakeFiles/program.dir/src/Skeleton.cpp.obj"
+  "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/framework.cpp" "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/CMakeFiles/program.dir/src/framework.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

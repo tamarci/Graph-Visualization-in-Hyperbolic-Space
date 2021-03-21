@@ -42,10 +42,10 @@ RM = "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi
+CMAKE_SOURCE_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug
 
 # Utility rule file for glew.
 
@@ -63,56 +63,56 @@ CMakeFiles/glew-complete: glew-prefix/src/glew-stamp/glew-patch
 CMakeFiles/glew-complete: glew-prefix/src/glew-stamp/glew-configure
 CMakeFiles/glew-complete: glew-prefix/src/glew-stamp/glew-build
 CMakeFiles/glew-complete: glew-prefix/src/glew-stamp/glew-install
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'glew'"
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/CMakeFiles/glew-complete
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/glew-done
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'glew'"
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/CMakeFiles
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/CMakeFiles/glew-complete
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/glew-done
 
 glew-prefix/src/glew-stamp/glew-install: glew-prefix/src/glew-stamp/glew-build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "No install step for 'glew'"
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E echo_append
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/glew-install
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "No install step for 'glew'"
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E echo_append
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/glew-install
 
 glew-prefix/src/glew-stamp/glew-mkdir:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Creating directories for 'glew'"
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/glew
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-build
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/tmp
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/glew-mkdir
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Creating directories for 'glew'"
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/glew
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-build
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/tmp
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E make_directory C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/glew-mkdir
 
 glew-prefix/src/glew-stamp/glew-download: glew-prefix/src/glew-stamp/glew-urlinfo.txt
 glew-prefix/src/glew-stamp/glew-download: glew-prefix/src/glew-stamp/glew-mkdir
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Performing download step (download, verify and extract) for 'glew'"
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -P C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/download-glew.cmake
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -P C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/verify-glew.cmake
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -P C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/extract-glew.cmake
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/glew-download
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Performing download step (download, verify and extract) for 'glew'"
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -P C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/download-glew.cmake
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -P C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/verify-glew.cmake
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -P C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/extract-glew.cmake
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/glew-download
 
 glew-prefix/src/glew-stamp/glew-update: glew-prefix/src/glew-stamp/glew-download
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "No update step for 'glew'"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "No update step for 'glew'"
 	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E echo_append
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/glew-update
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/glew-update
 
 glew-prefix/src/glew-stamp/glew-patch: glew-prefix/src/glew-stamp/glew-download
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "No patch step for 'glew'"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "No patch step for 'glew'"
 	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E echo_append
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/glew-patch
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/glew-patch
 
 glew-prefix/src/glew-stamp/glew-configure: glew-prefix/tmp/glew-cfgcmd.txt
 glew-prefix/src/glew-stamp/glew-configure: glew-prefix/src/glew-stamp/glew-update
 glew-prefix/src/glew-stamp/glew-configure: glew-prefix/src/glew-stamp/glew-patch
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No configure step for 'glew'"
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E echo_append
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/glew-configure
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No configure step for 'glew'"
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E echo_append
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/glew-configure
 
 glew-prefix/src/glew-stamp/glew-build: glew-prefix/src/glew-stamp/glew-configure
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "No build step for 'glew'"
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E echo_append
-	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-stamp/glew-build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "No build step for 'glew'"
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E echo_append
+	cd /d C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\glew-prefix\src\glew-build && "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E touch C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-stamp/glew-build
 
 glew: CMakeFiles/glew
 glew: CMakeFiles/glew-complete
@@ -137,6 +137,6 @@ CMakeFiles/glew.dir/clean:
 .PHONY : CMakeFiles/glew.dir/clean
 
 CMakeFiles/glew.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Marci\Desktop\prg\prog\grafika1hazi C:\Users\Marci\Desktop\prg\prog\grafika1hazi C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles\glew.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles\glew.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/glew.dir/depend
 

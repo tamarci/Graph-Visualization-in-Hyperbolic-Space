@@ -6,43 +6,17 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/Skeleton.cpp
-framework.h
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/framework.h
-
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/framework.h
-stdio.h
--
-stdlib.h
--
-math.h
--
-vector
--
-string
--
-GLUT/GLUT.h
--
-OpenGL/gl3.h
--
-windows.h
--
-glew/include/GL/glew.h
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/glew/include/GL/glew.h
-freeglut/include/GL/freeglut.h
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/freeglut/include/GL/freeglut.h
-
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/freeglut/include/GL/freeglut.h
+../src/freeglut/include/GL/freeglut.h
 freeglut_std.h
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/freeglut/include/GL/freeglut_std.h
+../src/freeglut/include/GL/freeglut_std.h
 freeglut_ext.h
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/freeglut/include/GL/freeglut_ext.h
+../src/freeglut/include/GL/freeglut_ext.h
 
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/freeglut/include/GL/freeglut_ext.h
+../src/freeglut/include/GL/freeglut_ext.h
 stdarg.h
 -
 
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/freeglut/include/GL/freeglut_std.h
+../src/freeglut/include/GL/freeglut_std.h
 windows.h
 -
 EGL/egl.h
@@ -62,7 +36,7 @@ GL/glu.h
 stdlib.h
 -
 
-C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/glew/include/GL/glew.h
+../src/glew/include/GL/glew.h
 stddef.h
 -
 inttypes.h
@@ -76,5 +50,31 @@ Availability.h
 OpenGL/glu.h
 -
 GL/glu.h
+-
+
+C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/Skeleton.cpp
+framework.h
+C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/framework.h
+
+C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/framework.h
+stdio.h
+-
+stdlib.h
+-
+math.h
+-
+vector
+-
+string
+-
+GLUT/GLUT.h
+-
+OpenGL/gl3.h
+-
+windows.h
+-
+GL/glew.h
+-
+GL/freeglut.h
 -
 

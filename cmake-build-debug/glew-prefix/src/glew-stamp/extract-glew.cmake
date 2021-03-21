@@ -1,7 +1,7 @@
 # Make file names absolute:
 #
-get_filename_component(filename "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew-prefix/src/glew-2.1.0-win32.zip" ABSOLUTE)
-get_filename_component(directory "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/glew" ABSOLUTE)
+get_filename_component(filename "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew-prefix/src/glew-2.1.0-win32.zip" ABSOLUTE)
+get_filename_component(directory "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/glew" ABSOLUTE)
 
 message(STATUS "extracting...
      src='${filename}'

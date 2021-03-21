@@ -43,10 +43,10 @@ RM = "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi
+CMAKE_SOURCE_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -74,18 +74,18 @@ preinstall:
 # Target rules for target CMakeFiles/program.dir
 
 # All Build rule for target.
-CMakeFiles/program.dir/all: CMakeFiles/glut.dir/all
 CMakeFiles/program.dir/all: CMakeFiles/glew.dir/all
+CMakeFiles/program.dir/all: CMakeFiles/glut.dir/all
 	$(MAKE) -f CMakeFiles\program.dir\build.make CMakeFiles/program.dir/depend
 	$(MAKE) -f CMakeFiles\program.dir\build.make CMakeFiles/program.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=17,18,19 "Built target program"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=17,18,19 "Built target program"
 .PHONY : CMakeFiles/program.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/program.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles 19
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles 19
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/program.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/program.dir/rule
 
 # Convenience name for target.
@@ -105,14 +105,14 @@ CMakeFiles/program.dir/clean:
 CMakeFiles/glut.dir/all:
 	$(MAKE) -f CMakeFiles\glut.dir\build.make CMakeFiles/glut.dir/depend
 	$(MAKE) -f CMakeFiles\glut.dir\build.make CMakeFiles/glut.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=9,10,11,12,13,14,15,16 "Built target glut"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=9,10,11,12,13,14,15,16 "Built target glut"
 .PHONY : CMakeFiles/glut.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/glut.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles 8
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/glut.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/glut.dir/rule
 
 # Convenience name for target.
@@ -132,14 +132,14 @@ CMakeFiles/glut.dir/clean:
 CMakeFiles/glew.dir/all:
 	$(MAKE) -f CMakeFiles\glew.dir\build.make CMakeFiles/glew.dir/depend
 	$(MAKE) -f CMakeFiles\glew.dir\build.make CMakeFiles/glew.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target glew"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target glew"
 .PHONY : CMakeFiles/glew.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/glew.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles 8
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/glew.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/glew.dir/rule
 
 # Convenience name for target.

@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Marci/Desktop/prg/prog/grafika1hazi
+# Install script for directory: C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/grafika1hazi")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/NEVEZZ_AT")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

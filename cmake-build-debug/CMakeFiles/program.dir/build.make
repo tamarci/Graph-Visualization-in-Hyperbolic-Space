@@ -42,10 +42,10 @@ RM = "C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi
+CMAKE_SOURCE_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/program.dir/depend.make
@@ -59,30 +59,30 @@ include CMakeFiles/program.dir/flags.make
 CMakeFiles/program.dir/src/framework.cpp.obj: CMakeFiles/program.dir/flags.make
 CMakeFiles/program.dir/src/framework.cpp.obj: CMakeFiles/program.dir/includes_CXX.rsp
 CMakeFiles/program.dir/src/framework.cpp.obj: ../src/framework.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/program.dir/src/framework.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\program.dir\src\framework.cpp.obj -c C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src\framework.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/program.dir/src/framework.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\program.dir\src\framework.cpp.obj -c C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src\framework.cpp
 
 CMakeFiles/program.dir/src/framework.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/src/framework.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src\framework.cpp > CMakeFiles\program.dir\src\framework.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src\framework.cpp > CMakeFiles\program.dir\src\framework.cpp.i
 
 CMakeFiles/program.dir/src/framework.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/src/framework.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src\framework.cpp -o CMakeFiles\program.dir\src\framework.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src\framework.cpp -o CMakeFiles\program.dir\src\framework.cpp.s
 
 CMakeFiles/program.dir/src/Skeleton.cpp.obj: CMakeFiles/program.dir/flags.make
 CMakeFiles/program.dir/src/Skeleton.cpp.obj: CMakeFiles/program.dir/includes_CXX.rsp
 CMakeFiles/program.dir/src/Skeleton.cpp.obj: ../src/Skeleton.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/program.dir/src/Skeleton.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\program.dir\src\Skeleton.cpp.obj -c C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src\Skeleton.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/program.dir/src/Skeleton.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\program.dir\src\Skeleton.cpp.obj -c C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src\Skeleton.cpp
 
 CMakeFiles/program.dir/src/Skeleton.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/program.dir/src/Skeleton.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src\Skeleton.cpp > CMakeFiles\program.dir\src\Skeleton.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src\Skeleton.cpp > CMakeFiles\program.dir\src\Skeleton.cpp.i
 
 CMakeFiles/program.dir/src/Skeleton.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/program.dir/src/Skeleton.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Marci\Desktop\prg\prog\grafika1hazi\src\Skeleton.cpp -o CMakeFiles\program.dir\src\Skeleton.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\src\Skeleton.cpp -o CMakeFiles\program.dir\src\Skeleton.cpp.s
 
 # Object files for target program
 program_OBJECTS = \
@@ -98,10 +98,10 @@ program.exe: CMakeFiles/program.dir/build.make
 program.exe: CMakeFiles/program.dir/linklibs.rsp
 program.exe: CMakeFiles/program.dir/objects1.rsp
 program.exe: CMakeFiles/program.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable program.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable program.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\program.dir\link.txt --verbose=$(VERBOSE)
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E copy C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/freeglut/bin/freeglut.dll C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/freeglut.dll
-	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E copy C:/Users/Marci/Desktop/prg/prog/grafika1hazi/src/glew/bin/Release/Win32/glew32.dll C:/Users/Marci/Desktop/prg/prog/grafika1hazi/cmake-build-debug/glew32.dll
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E copy C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/freeglut/bin/freeglut.dll C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/freeglut.dll
+	"C:\Users\Marci\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -E copy C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/src/glew/bin/Release/Win32/glew32.dll C:/Users/Marci/Desktop/prg/prog/grafika1hazi/hiperbolicGraph/cmake-build-debug/glew32.dll
 
 # Rule to build all files generated by this target.
 CMakeFiles/program.dir/build: program.exe
@@ -113,6 +113,6 @@ CMakeFiles/program.dir/clean:
 .PHONY : CMakeFiles/program.dir/clean
 
 CMakeFiles/program.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Marci\Desktop\prg\prog\grafika1hazi C:\Users\Marci\Desktop\prg\prog\grafika1hazi C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug C:\Users\Marci\Desktop\prg\prog\grafika1hazi\cmake-build-debug\CMakeFiles\program.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug C:\Users\Marci\Desktop\prg\prog\grafika1hazi\hiperbolicGraph\cmake-build-debug\CMakeFiles\program.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/program.dir/depend
 

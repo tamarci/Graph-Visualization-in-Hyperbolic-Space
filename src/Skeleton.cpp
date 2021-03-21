@@ -6,14 +6,14 @@
 // - mast "beincludolni", illetve mas konyvtarat hasznalni
 // - faljmuveleteket vegezni a printf-et kiveve
 // - Mashonnan atvett programresszleteket forrasmegjeloles nelkul felhasznalni es
-// - felesleges programsorokat a beadott programban hagyni!!!!!!! 
+// - felesleges programsorokat a beadott programban hagyni!!!!!!!
 // - felesleges kommenteket a beadott programba irni a forrasmegjelolest kommentjeit kiveve
 // ---------------------------------------------------------------------------------------------
 // A feladatot ANSI C++ nyelvu forditoprogrammal ellenorizzuk, a Visual Studio-hoz kepesti elteresekrol
 // es a leggyakoribb hibakrol (pl. ideiglenes objektumot nem lehet referencia tipusnak ertekul adni)
 // a hazibeado portal ad egy osszefoglalot.
 // ---------------------------------------------------------------------------------------------
-// A feladatmegoldasokban csak olyan OpenGL fuggvenyek hasznalhatok, amelyek az oran a feladatkiadasig elhangzottak 
+// A feladatmegoldasokban csak olyan OpenGL fuggvenyek hasznalhatok, amelyek az oran a feladatkiadasig elhangzottak
 // A keretben nem szereplo GLUT fuggvenyek tiltottak.
 //
 // NYILATKOZAT
@@ -43,12 +43,12 @@ const char *const vertexSource = R"(
 
 
 	layout(location = 0) in vec2 vertexPosition;	// Varying input: vp = vertex position is expected in attrib array 0
-    layout(location = 1) in vec3 vertexColor;
+    layout(location = 1) in vec2 vertexUV;
 
-    out vec3 color;
+    out vec2 texCoord;
 
 	void main() {
-        color = vec3(1,0,0);
+        texCoord= vertexUV;
 		gl_Position = vec4(vertexPosition.x, vertexPosition.y, 0, sqrt(vertexPosition.x*vertexPosition.x+vertexPosition.y*vertexPosition.y+1));		// transform vp from modeling space to normalized device space
 	}
 )";
@@ -58,11 +58,16 @@ const char *const fragmentSource = R"(
 	#version 330			// Shader 3.3
 	precision highp float;	// normal floats, makes no difference on desktop computers
 
-    in vec3 color;		// uniform variable, the color of the primitive
+    uniform sampler2D textureUnit;
+
+    in vec2 texCoord;		// uniform variable, the color of the primitive
 	out vec4  fragmentColor;		// computed color of the current pixel
 
+
+
 	void main() {
-		fragmentColor = vec4(color, 1);	// computed color is the color of the primitive
+		fragmentColor = texture(textureUnit, texCoord);
+
 	}
 )";
 
@@ -70,6 +75,9 @@ GPUProgram gpuProgram; // vertex and fragment shaders
 
 constexpr float PI = (float) M_PI;
 const vec3 ORIGIN(0, 0, 1);
+
+Texture myTexture;
+vec2 movingVector(0, 0);
 
 // Initialization, create an OpenGL context
 
@@ -79,7 +87,7 @@ vec3 segmentEq(vec3 p1, vec3 dv, float distance) {
 }
 
 vec3 directionVector(vec3 p1, vec3 m, float distance) {
-    return (m - p1 * std::cosh(distance)) / sinh(distance);
+    return (m - p1 * std::cosh(distance)) / std::sinh(distance);
 }
 
 float lorentzEq(vec3 p1, vec3 p2) {
@@ -92,7 +100,8 @@ float distance(vec3 p1, vec3 p2) {
 
 vec3 mirrorPoint(vec3 point, vec3 symmetryPoint) {
     float d = distance(point, symmetryPoint);
-    if (d < 0.001) {
+    if (d < 0.00001f) {
+
         return point;
     }
     vec3 directionVec = directionVector(point, symmetryPoint, d);
@@ -110,7 +119,7 @@ vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2) {
 
     vec3 mirroredP1 = mirrorPoint(p1, q1);
     float d = distance(q1, q2);
-    if (d < 0.001) {
+    if (d < 0.00001f) {
         return p1;
     }
     vec3 directionVec = directionVector(q1, q2, d);
@@ -119,7 +128,7 @@ vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2) {
 }
 
 class Circle {
-    unsigned int vao, vbo;
+    unsigned int vao, vbo[2];
     vec3 center;
     const float radius = 0.04;
 
@@ -131,24 +140,43 @@ public:
         glGenVertexArrays(1, &vao);
         glBindVertexArray(vao);
 
-        glGenBuffers(1, &vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
+        glGenBuffers(2, vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
         this->center = vec3(center.x, center.y, sqrt(center.x * center.x + center.y * center.y + 1));
 
-
         generateData();
 
-
-        glEnableVertexAttribArray(0);
-
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        generateTexture();
     }
 
+    void generateTexture() {
+
+        vec2 textureUVCoordinates[20];
+        for (int i = 0; i < 20; ++i) {
+            float x = (std::cos(i * 2 * PI / 20) + 1) / 2;
+            float y = (std::sin(i * 2 * PI / 20) + 1) / 2;
+            textureUVCoordinates[i] = vec2(x, y);
+        }
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+        glBufferData(GL_ARRAY_BUFFER, 20 * sizeof(vec2), textureUVCoordinates, GL_DYNAMIC_DRAW);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+        std::vector<vec4> colors;
+        colors.resize(50 * 50);
+        colors.assign(50 * 50, vec4(1, 0.5, 0, 1));
+        colors.assign(50 * 25, vec4(1, 1, 0, 1));
+
+
+        myTexture.create(50, 50, colors);
+    }
 
     void generateData() {
         float points[40]; //(20)*2
+        vec3 mouseOffset3{movingVector.x, movingVector.y,
+                          sqrt(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
 
         for (int i = 0; i < 20; i++) {
 
@@ -157,20 +185,21 @@ public:
             float z = sqrt(x * x + y * y + 1);
             vec3 translatedP = hiperbolicTranslate(vec3(x, y, z), ORIGIN, center);
 
+            translatedP = hiperbolicTranslate(translatedP, ORIGIN, mouseOffset3);
+
             points[i * 2] = translatedP.x;
             points[i * 2 + 1] = translatedP.y;
         }
 
 
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
         glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_DYNAMIC_DRAW); //CPU-ra
-
 
     }
 
     void updateCenter(vec3 newCenter) {
-        center= newCenter;
-       generateData();
+        center = newCenter;
+        generateData();
     }
 
     void Draw() {
@@ -186,47 +215,44 @@ class Edge {
 
 public:
     void create(vec3 center1, vec3 center2) {
-        float centers[6];
+        float centers[4];
         centers[0] = center1.x;
         centers[1] = center1.y;
-        centers[2] = center1.z;
-        centers[3] = center2.x;
-        centers[4] = center2.y;
-        centers[6] = center2.z;
+        centers[2] = center2.x;
+        centers[3] = center2.y;
         glGenVertexArrays(1, &vao);
         glBindVertexArray(vao);
 
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-
         glBufferData(GL_ARRAY_BUFFER, sizeof(centers), centers, GL_DYNAMIC_DRAW); //CPU-ra
 
         glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
 
     }
 
-    void updateCenter(vec3 center1, vec3 center2){
-        float centers[6];
-        centers[0] = center1.x;
-        centers[1] = center1.y;
-        centers[2] = center1.z;
-        centers[3] = center2.x;
-        centers[4] = center2.y;
-        centers[6] = center2.z;
+    void updateCenter(vec3 center1, vec3 center2) {
+        vec3 mouseOffset3{movingVector.x, movingVector.y,
+                          sqrt(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
+
+        vec3 translatedCenter1 = hiperbolicTranslate(center1, ORIGIN, mouseOffset3);
+        vec3 translatedCenter2 = hiperbolicTranslate(center2, ORIGIN, mouseOffset3);
+
+        float centers[4];
+        centers[0] = translatedCenter1.x;
+        centers[1] = translatedCenter1.y;
+        centers[2] = translatedCenter2.x;
+        centers[3] = translatedCenter2.y;
 
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
         glBufferData(GL_ARRAY_BUFFER, sizeof(centers), centers, GL_DYNAMIC_DRAW); //CPU-ra
-
-        glEnableVertexAttribArray(0);
-
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
     }
+
     void Draw() {
         glBindVertexArray(vao);
         glDrawArrays(GL_LINES, 0, 2);
@@ -293,7 +319,7 @@ void onInitialization() {
 
 
     for (int i = 0; i < 50; ++i) {
-        circles[i].create(vec2(randomFloat(), randomFloat()) * 2 - vec2(1, 1));
+        circles[i].create(vec2(randomFloat(), randomFloat()) * 4 - vec2(1, 1));
     }
 
     for (int i = 0; i < 61; ++i) {
@@ -313,21 +339,16 @@ void onDisplay() {
     glClear(GL_COLOR_BUFFER_BIT); // clear frame buffer
     gpuProgram.Use();
 
+    for (int i = 0; i < 61; ++i) {
+        edges[i].Draw();
+    }
+
+    gpuProgram.setUniform(myTexture, "textureUnit");
     for (int i = 0; i < 50; ++i) {
         circles[i].Draw();
     }
 
-    for (int i = 0; i < 50; ++i) {
-        edges[i].Draw();
-    }
-
-
-    // Set color to (0, 1, 0) = green
-
-
     glutSwapBuffers(); // exchange buffers for double buffering
-
-
 }
 
 // Key of ASCII code pressed
@@ -343,32 +364,38 @@ vec3 convertCoordinates(float x, float y) {
     return vec3(x / sqrt(1 - x * x - y * y), y / sqrt(1 - x * x - y * y), 1 / sqrt(1 - x * x - y * y));
 }
 
-void translateAll(vec3 q1, vec3 q2) {
+void updateAll() {
+
+    for (int i = 0; i < 50; ++i) {
+        // vec3 translatedCenter = hiperbolicTranslate(circles[i].getCenter(), q1, q2);
+        circles[i].generateData();
+    }
 
     for (int i = 0; i < 61; ++i) {
-        vec3 translatedCenter1 = hiperbolicTranslate(circles[(int) edgePairs[i].x].getCenter(), q1, q2);
-        circles[(int) edgePairs[i].x].updateCenter(translatedCenter1);
+        edges[i].updateCenter(circles[(int) edgePairs[i].x].getCenter(), circles[(int) edgePairs[i].y].getCenter());
 
-        vec3 translatedCenter2 = hiperbolicTranslate(circles[(int) edgePairs[i].y].getCenter(), q1, q2);
-        circles[(int)edgePairs[i].y].updateCenter(translatedCenter2);
-
-        edges[i].updateCenter(translatedCenter1, translatedCenter2);
     }
 
 }
 
-vec3 pos;
-vec3 oldPos(0,0,1);
+vec2 pos;
+vec2 oldPos(0, 0);
+
 // Move mouse with key pressed
 void onMouseMotion(int pX,
                    int pY) {    // pX, pY are the pixel coordinates of the cursor in the coordinate system of the operation system
     // Convert to normalized device space
     float cX = 2.0f * pX / windowWidth - 1;    // flip y axis
     float cY = 1.0f - 2.0f * pY / windowHeight;
-    pos = convertCoordinates(cX, cY);
-    translateAll(oldPos, pos);
-    oldPos=pos;
+
+    movingVector = movingVector + vec2{cX, cY} - oldPos;
+
+    pos = vec2(cX, cY);
+
+    oldPos = pos;
     printf("Mouse moved to (%3.2f, %3.2f)\n", cX, cY);
+
+    updateAll();
     onDisplay();
 }
 
@@ -379,34 +406,10 @@ void onMouse(int button, int state, int pX,
     // Convert to normalized device space
     float cX = 2.0f * pX / windowWidth - 1;    // flip y axis
     float cY = 1.0f - 2.0f * pY / windowHeight;
-    oldPos = convertCoordinates(cX, cY);
+    oldPos = vec2(cX, cY);
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 
-    }
-
-
-    char *buttonStat;
-    switch (state) {
-        case GLUT_DOWN:
-            buttonStat = "pressed";
-            break;
-        case GLUT_UP:
-            buttonStat = "released";
-            break;
-    }
-
-    switch (button) {
-        case GLUT_LEFT_BUTTON:
-            printf("Left button %s at (%3.2f, %3.2f)\n", buttonStat, cX, cY);
-
-            break;
-        case GLUT_MIDDLE_BUTTON:
-            printf("Middle button %s at (%3.2f, %3.2f)\n", buttonStat, cX, cY);
-            break;
-        case GLUT_RIGHT_BUTTON:
-            printf("Right button %s at (%3.2f, %3.2f)\n", buttonStat, cX, cY);
-            break;
     }
 }
 
@@ -414,4 +417,3 @@ void onMouse(int button, int state, int pX,
 void onIdle() {
     long time = glutGet(GLUT_ELAPSED_TIME); // elapsed time since the start of the program
 }
-

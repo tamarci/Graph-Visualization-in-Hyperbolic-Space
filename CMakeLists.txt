@@ -26,7 +26,9 @@ file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/cmake)
 
 file(DOWNLOAD http://cg.iit.bme.hu/~szirmay/grafika/framework.cpp ${SRC_FOLDER}/framework.cpp)
 file(DOWNLOAD http://cg.iit.bme.hu/~szirmay/grafika/framework.h ${SRC_FOLDER}/framework.h)
-file(DOWNLOAD http://cg.iit.bme.hu/~szirmay/grafika/Skeleton.cpp ${SRC_FOLDER}/Skeleton.cpp)
+if (NOT EXISTS "${SRC_FOLDER}/Skeleton.cpp")
+    file(DOWNLOAD http://cg.iit.bme.hu/~szirmay/grafika/Skeleton.cpp ${SRC_FOLDER}/Skeleton.cpp)
+endif()
 
 set_source_files_properties(${SRC_FOLDER}/Skeleton.cpp ${SRC_FOLDER}/framework.cpp
         ${SRC_FOLDER}/framework.h PROPERTIES GENERATED TRUE)
@@ -73,7 +75,6 @@ if (WIN32)
         target_link_directories(program PRIVATE ${SRC_FOLDER}/freeglut/lib/x64 ${SRC_FOLDER}/glew/lib/Release/x64)
         add_custom_command(TARGET program COMMAND ${CMAKE_COMMAND} -E copy ${SRC_FOLDER}/freeglut/bin/x64/freeglut.dll ${CMAKE_BINARY_DIR}/freeglut.dll)
         add_custom_command(TARGET program COMMAND ${CMAKE_COMMAND} -E copy ${SRC_FOLDER}/glew/bin/Release/x64/glew32.dll ${CMAKE_BINARY_DIR}/glew32.dll)
-        message("Hello")
     else()
         target_link_directories(program PRIVATE ${SRC_FOLDER}/freeglut/lib ${SRC_FOLDER}/glew/lib/Release/Win32)
         add_custom_command(TARGET program COMMAND ${CMAKE_COMMAND} -E copy ${SRC_FOLDER}/freeglut/bin/freeglut.dll ${CMAKE_BINARY_DIR}/freeglut.dll)
