@@ -107,7 +107,7 @@ vec3 mirrorPoint(vec3 point, vec3 symmetryPoint) {
     return segmentEq(point, directionVec, 2 * d);
 }
 
-vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2, float multiplier) {
+vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2, float multiplier=1) {
 
     vec3 mirroredP1 = mirrorPoint(p1, q1);
     float d = distance(q1, q2);
@@ -123,6 +123,9 @@ float ranFloat() {
     return (float) rand() / RAND_MAX;
 }
 
+float calcZ(float x, float y){
+    return sqrt(x *x + y* y + 1);
+}
 
 class Circle {
     unsigned int vao, vbo[2];
@@ -143,7 +146,7 @@ public:
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-        this->center = vec3(center.x, center.y, sqrt(center.x * center.x + center.y * center.y + 1));
+        this->center = vec3(center.x, center.y, calcZ(center.x,center.y));
 
         generateData();
 
@@ -179,17 +182,18 @@ public:
         myTexture.create(50, 50, textureOutlook);
     }
 
+
     void generateData() {
         float points[40]; //(20)*2
         vec3 mv3{movingVector.x, movingVector.y,
-                 sqrt(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
+                 calcZ(movingVector.x,movingVector.y)};
 
         for (int i = 0; i < 20; i++) {
 
             float x = (radius * std::cos(i * 2 * PI / 20));
             float y = (radius * std::sin(i * 2 * PI / 20));
             float z = sqrt(x * x + y * y + 1);
-            vec3 translatedP = hiperbolicTranslate(vec3(x, y, z), ORIGIN, center,1);
+            vec3 translatedP = hiperbolicTranslate(vec3(x, y, z), ORIGIN, center);
 
             translatedP = hiperbolicTranslate(translatedP, ORIGIN, mv3, 1);
 
@@ -298,6 +302,8 @@ Circle circles[50];
 std::vector<vec2> edgePairs = shuffledEdgeGen();
 Edge edges[61];
 std::vector<vec3> forceVector;
+std::vector<vec3> speedVector;
+
 
 bool parban(int a, int b) {
 
@@ -311,8 +317,9 @@ bool parban(int a, int b) {
 }
 
 void resetForce(){
+    forceVector.resize(50);
     for (int i = 0; i < forceVector.size(); ++i) {
-        forceVector.at(i).z=1;
+        forceVector.at(i)=vec3(0,0,1);
     }
 }
 void calculateAllForce(){
@@ -331,6 +338,23 @@ void calculateAllForce(){
             forceVector.at(j) = hiperbolicTranslate(forceVector.at(j),circles[j].getCenter(),circles[i].getCenter(), multiplier);
         }
     }
+}
+
+void calculateAllCenters(){
+    float forceDist,velocityDist,circleDist;
+    vec3 forceTranslate,velocityTranslate,circleTranslate;
+    for (int i = 0; i < 50; ++i) {
+       forceDist=distance(circles[i].getCenter(),ORIGIN);
+       //forceTranslate= translate();
+       speedVector.at(i)= hiperbolicTranslate(circles[i].getCenter(),ORIGIN,forceVector.at(i),0.01);
+
+
+       //velocityre és centerekre is ez
+       //valahol z-t frissiteni
+       // surlodas és milyen idovezerles kell
+
+    }
+
 }
 
 vec2 heuristicGen(std::vector<vec2> centers) {
@@ -374,7 +398,8 @@ void onInitialization() {
     glLineWidth(2.0f);
 
     std::vector<vec2> Centers;
-
+    forceVector.resize(50);
+    speedVector.resize(50);
 
     for (int i = 0; i < 50; ++i) {
         vec2 newCenter = heuristicGen(Centers);
