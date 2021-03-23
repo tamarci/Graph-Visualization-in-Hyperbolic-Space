@@ -76,7 +76,6 @@ GPUProgram gpuProgram; // vertex and fragment shaders
 constexpr float PI = (float) M_PI;
 const vec3 ORIGIN(0, 0, 1);
 
-Texture myTexture;
 vec2 movingVector(0, 0);
 
 // Initialization, create an OpenGL context
@@ -107,15 +106,8 @@ vec3 mirrorPoint(vec3 point, vec3 symmetryPoint) {
     vec3 directionVec = directionVector(point, symmetryPoint, d);
     return segmentEq(point, directionVec, 2 * d);
 }
-//tükrözés lépései:
-//p és m pontok távolsága -> distance
-//v vector meghatarozása
-//r helyere m et
-// segmentEqba nem 1 hanem ket dvel havando
 
-vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2) {
-    //felezopont meghatározása
-    //tükrözés
+vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2, float multiplier) {
 
     vec3 mirroredP1 = mirrorPoint(p1, q1);
     float d = distance(q1, q2);
@@ -123,14 +115,20 @@ vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2) {
         return p1;
     }
     vec3 directionVec = directionVector(q1, q2, d);
-    vec3 symmetryPoint = segmentEq(q1, directionVec, d / 2);
+    vec3 symmetryPoint = segmentEq(q1, directionVec, (d / 2)*multiplier);
     return mirrorPoint(mirroredP1, symmetryPoint);
 }
+
+float ranFloat() {
+    return (float) rand() / RAND_MAX;
+}
+
 
 class Circle {
     unsigned int vao, vbo[2];
     vec3 center;
     const float radius = 0.04;
+    Texture myTexture;
 
 
 public:
@@ -161,31 +159,39 @@ public:
             textureUVCoordinates[i] = vec2(x, y);
         }
         glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
-        glBufferData(GL_ARRAY_BUFFER, 20 * sizeof(vec2), textureUVCoordinates, GL_DYNAMIC_DRAW);
+
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-        std::vector<vec4> colors;
-        colors.resize(50 * 50);
-        colors.assign(50 * 50, vec4(1, 0.5, 0, 1));
-        colors.assign(50 * 25, vec4(1, 1, 0, 1));
 
+        glBufferData(GL_ARRAY_BUFFER, 20 * sizeof(vec2), textureUVCoordinates, GL_STATIC_DRAW);
 
-        myTexture.create(50, 50, colors);
+        std::vector<vec4> textureOutlook;
+        textureOutlook.resize(50 * 50);
+
+        vec4 color0(ranFloat(), ranFloat(), ranFloat(), 1);
+        vec4 color1(ranFloat(), ranFloat(), ranFloat(), 1);
+        vec4 color2(ranFloat(), ranFloat(), ranFloat(), 1);
+
+        textureOutlook.assign(50 * 50, color0);
+        textureOutlook.assign(50 * 33, color1);
+        textureOutlook.assign(50 * 16, color2);
+
+        myTexture.create(50, 50, textureOutlook);
     }
 
     void generateData() {
         float points[40]; //(20)*2
-        vec3 mouseOffset3{movingVector.x, movingVector.y,
-                          sqrt(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
+        vec3 mv3{movingVector.x, movingVector.y,
+                 sqrt(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
 
         for (int i = 0; i < 20; i++) {
 
             float x = (radius * std::cos(i * 2 * PI / 20));
             float y = (radius * std::sin(i * 2 * PI / 20));
             float z = sqrt(x * x + y * y + 1);
-            vec3 translatedP = hiperbolicTranslate(vec3(x, y, z), ORIGIN, center);
+            vec3 translatedP = hiperbolicTranslate(vec3(x, y, z), ORIGIN, center,1);
 
-            translatedP = hiperbolicTranslate(translatedP, ORIGIN, mouseOffset3);
+            translatedP = hiperbolicTranslate(translatedP, ORIGIN, mv3, 1);
 
             points[i * 2] = translatedP.x;
             points[i * 2 + 1] = translatedP.y;
@@ -197,13 +203,10 @@ public:
 
     }
 
-    void updateCenter(vec3 newCenter) {
-        center = newCenter;
-        generateData();
-    }
 
     void Draw() {
         glBindVertexArray(vao);
+        gpuProgram.setUniform(myTexture, "textureUnit");
         glDrawArrays(GL_TRIANGLE_FAN, 0, 20);
     }
 
@@ -211,8 +214,11 @@ public:
 
 class Edge {
     unsigned int vao, vbo;
-
-
+//velocity állandó
+//erõ változik
+//olyan függvény kell ami szimmetrikus és metszi az x tengely
+//sinh(x-1)
+//tanhx-1
 public:
     void create(vec3 center1, vec3 center2) {
         float centers[4];
@@ -239,8 +245,8 @@ public:
         vec3 mouseOffset3{movingVector.x, movingVector.y,
                           sqrt(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
 
-        vec3 translatedCenter1 = hiperbolicTranslate(center1, ORIGIN, mouseOffset3);
-        vec3 translatedCenter2 = hiperbolicTranslate(center2, ORIGIN, mouseOffset3);
+        vec3 translatedCenter1 = hiperbolicTranslate(center1, ORIGIN, mouseOffset3,1);
+        vec3 translatedCenter2 = hiperbolicTranslate(center2, ORIGIN, mouseOffset3,1);
 
         float centers[4];
         centers[0] = translatedCenter1.x;
@@ -266,7 +272,6 @@ std::vector<vec2> shuffledEdgeGen() {
         for (int j = i + 1; j < 50; ++j) {
             vec2 newEdge(i, j);
             temp.push_back(newEdge);
-
         }
     }
 
@@ -292,34 +297,89 @@ std::vector<vec2> shuffledEdgeGen() {
 Circle circles[50];
 std::vector<vec2> edgePairs = shuffledEdgeGen();
 Edge edges[61];
+std::vector<vec3> forceVector;
 
-float randomFloat() {
-    return (float) rand() / RAND_MAX;
+bool parban(int a, int b) {
+
+    for (int i = 0; i < edgePairs.size(); ++i) {
+        if ((a == edgePairs.at(i).x && b == edgePairs.at(i).y) || (a == edgePairs.at(i).y && b == edgePairs.at(i).x)) {
+            return true;
+        }
+    }
+    return false;
+
 }
 
-
-void GLAPIENTRY messageCallback(GLenum source,
-                                GLenum type,
-                                GLuint id,
-                                GLenum severity,
-                                GLsizei length,
-                                const GLchar *message,
-                                const void *userParam) {
-    if (type == GL_DEBUG_TYPE_ERROR) {
-        fprintf(stderr, "ERROR, severity = 0x%x, message = %s\n", severity, message);
+void resetForce(){
+    for (int i = 0; i < forceVector.size(); ++i) {
+        forceVector.at(i).z=1;
+    }
+}
+void calculateAllForce(){
+    float force;
+    for (int i = 0; i < 50; ++i) {
+        for (int j = i + 1; j < 50; ++j) {
+            float dist = distance(circles[i].getCenter(),circles[j].getCenter());
+           if(parban(i,j)){
+               force = std::sinh(dist-0.5f);
+           }
+           else{
+               force= -1/dist/8;
+           }
+           float multiplier = force/dist; //ez nem biztos h jo igy
+           forceVector.at(i) = hiperbolicTranslate(forceVector.at(i),circles[i].getCenter(),circles[j].getCenter(), multiplier);
+            forceVector.at(j) = hiperbolicTranslate(forceVector.at(j),circles[j].getCenter(),circles[i].getCenter(), multiplier);
+        }
     }
 }
 
+vec2 heuristicGen(std::vector<vec2> centers) {
+    float x;
+    float y;
+    float nev = 0;
+    float szamx = 0;
+    float szamy = 0;
+    for (int i = 0; i < centers.size(); ++i) {
+        float m;
+        if (parban(i, centers.size())) {
+            m = 1;
+        } else {
+            m = 0.01;
+        }
+        szamx += centers.at(i).x*m;
+        szamy += centers.at(i).y*m;
+        nev += m;
+      //  if(nev <0){
+        //    nev= -nev;
+        //}
+
+    }
+    if (centers.size() == 0) {
+        x = ranFloat();
+        y = ranFloat();
+    } else {
+        x = szamx / nev;
+        y = szamy / nev;
+    }
+
+    return vec2(x, y);
+}
+
+
 void onInitialization() {
     glEnable(GL_DEBUG_OUTPUT);
-    glDebugMessageCallback(messageCallback, nullptr);
+
 
     glViewport(0, 0, windowWidth, windowHeight);
     glLineWidth(2.0f);
 
+    std::vector<vec2> Centers;
+
 
     for (int i = 0; i < 50; ++i) {
-        circles[i].create(vec2(randomFloat(), randomFloat()) * 4 - vec2(1, 1));
+        vec2 newCenter = heuristicGen(Centers);
+        Centers.push_back(newCenter);
+        circles[i].create(vec2(ranFloat(),ranFloat()) * 6 - vec2(3, 3));
     }
 
     for (int i = 0; i < 61; ++i) {
@@ -343,7 +403,7 @@ void onDisplay() {
         edges[i].Draw();
     }
 
-    gpuProgram.setUniform(myTexture, "textureUnit");
+    //gpuProgram.setUniform(myTexture, "textureUnit");
     for (int i = 0; i < 50; ++i) {
         circles[i].Draw();
     }
@@ -358,10 +418,6 @@ void onKeyboard(unsigned char key, int pX, int pY) {
 
 // Key of ASCII code released
 void onKeyboardUp(unsigned char key, int pX, int pY) {
-}
-
-vec3 convertCoordinates(float x, float y) {
-    return vec3(x / sqrt(1 - x * x - y * y), y / sqrt(1 - x * x - y * y), 1 / sqrt(1 - x * x - y * y));
 }
 
 void updateAll() {
