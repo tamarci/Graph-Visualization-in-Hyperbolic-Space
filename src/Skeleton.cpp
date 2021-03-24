@@ -421,13 +421,21 @@ void forceControll() {
 
 void heuristicGen() {
 
+
+
     for (int i = 0; i < 50; ++i) {
 
-
-        vec3 center = hiperbolicTranslate(circles[i].getCenter(), circles[i].getCenter(), ORIGIN, 0.8);
+        float neighbour=0;
+        for (int j = 0; j < 50; ++j) {
+            if(parban(i,j)){
+                neighbour++;
+            }
+        }
+        float multiplier = tanhf(neighbour/8+0.2);// tanh
+        vec3 center = hiperbolicTranslate(circles[i].getCenter(), circles[i].getCenter(), ORIGIN, multiplier);
 
         circles[i].setCenter(vec2(center.x, center.y));
-        printf("%d %d %d",center.x,center.y,center.z);
+
 
 
     }
