@@ -86,28 +86,31 @@ vec3 segmentEq(vec3 p1, vec3 dv, float distance) {
 }
 
 vec3 directionVector(vec3 p1, vec3 m, float distance) {
-    return (m - p1 * coshf(distance)) /sinhf(distance);
+    return (m - p1 * coshf(distance)) / sinhf(distance);
 }
 
 float lorentzEq(vec3 p1, vec3 p2) {
-    return p1.x * p2.x + p1.y * p2.y - p1.z * p2.z;
+    float a= p1.x * p2.x + p1.y * p2.y - p1.z * p2.z;
+    if (a>-1)
+        return -1.00001;
+    return a;
 }
 
 float distance(vec3 p1, vec3 p2) {
-    return acosh(-lorentzEq(p1, p2));
+    float b= acoshf(-lorentzEq(p1, p2));
+    return b;
 }
 
 vec3 mirrorPoint(vec3 point, vec3 symmetryPoint) {
     float d = distance(point, symmetryPoint);
     if (d < 0.00001f) {
-
         return point;
     }
     vec3 directionVec = directionVector(point, symmetryPoint, d);
     return segmentEq(point, directionVec, 2 * d);
 }
 
-vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2, float multiplier=1) {
+vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2, float multiplier = 1) {
 
     vec3 mirroredP1 = mirrorPoint(p1, q1);
     float d = distance(q1, q2);
@@ -115,7 +118,7 @@ vec3 hiperbolicTranslate(vec3 p1, vec3 q1, vec3 q2, float multiplier=1) {
         return p1;
     }
     vec3 directionVec = directionVector(q1, q2, d);
-    vec3 symmetryPoint = segmentEq(q1, directionVec, (d / 2)*multiplier);
+    vec3 symmetryPoint = segmentEq(q1, directionVec, (d / 2) * multiplier);
     return mirrorPoint(mirroredP1, symmetryPoint);
 }
 
@@ -123,8 +126,8 @@ float ranFloat() {
     return (float) rand() / RAND_MAX;
 }
 
-float calcZ(float x, float y){
-    return sqrtf(x *x + y* y + 1);
+float calcZ(float x, float y) {
+    return sqrtf(x * x + y * y + 1);
 }
 
 class Circle {
@@ -136,10 +139,11 @@ class Circle {
 
 public:
     vec3 getCenter() { return center; }
-    void setCenter(vec2 c) {center=c;
-        center.z= calcZ(c.x,c.y);
 
-        }
+    void setCenter(vec2 c) {
+        center = c;
+        center.z = calcZ(c.x, c.y);
+    }
 
     void create(vec2 center) {
         glGenVertexArrays(1, &vao);
@@ -150,7 +154,7 @@ public:
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-        this->center = vec3(center.x, center.y, calcZ(center.x,center.y));
+        this->center = vec3(center.x, center.y, calcZ(center.x, center.y));
 
         generateData();
 
@@ -189,14 +193,18 @@ public:
 
     void generateData() {
         float points[40]; //(20)*2
+
         vec3 mv3{movingVector.x, movingVector.y,
-                 calcZ(movingVector.x,movingVector.y)};
+                 calcZ(movingVector.x, movingVector.y)};
 
         for (int i = 0; i < 20; i++) {
 
             float x = (radius * cosf(i * 2 * PI / 20));
             float y = (radius * sinf(i * 2 * PI / 20));
-            float z = calcZ(x,y);
+            float z = calcZ(x, y);
+
+            center = vec3(center.x,center.y,calcZ(center.x,center.y));
+
             vec3 translatedP = hiperbolicTranslate(vec3(x, y, z), ORIGIN, center);
 
             translatedP = hiperbolicTranslate(translatedP, ORIGIN, mv3, 1);
@@ -219,6 +227,7 @@ public:
     }
 
 };
+
 //dögöljön meg a tulipán, hulljanak le a ...
 class Edge {
     unsigned int vao, vbo;
@@ -253,8 +262,8 @@ public:
         vec3 mouseOffset3{movingVector.x, movingVector.y,
                           sqrtf(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
 
-        vec3 translatedCenter1 = hiperbolicTranslate(center1, ORIGIN, mouseOffset3,1);
-        vec3 translatedCenter2 = hiperbolicTranslate(center2, ORIGIN, mouseOffset3,1);
+        vec3 translatedCenter1 = hiperbolicTranslate(center1, ORIGIN, mouseOffset3, 1);
+        vec3 translatedCenter2 = hiperbolicTranslate(center2, ORIGIN, mouseOffset3, 1);
 
         float centers[4];
         centers[0] = translatedCenter1.x;
@@ -307,7 +316,7 @@ std::vector<vec2> edgePairs = shuffledEdgeGen();
 Edge edges[61];
 std::vector<vec3> forceVector;
 std::vector<vec3> speedVector;
-bool forceC=false;
+bool forceC = false;
 
 
 bool parban(int a, int b) {
@@ -320,6 +329,7 @@ bool parban(int a, int b) {
     return false;
 
 }
+
 void updateAll() {
 
     for (int i = 0; i < 50; ++i) {
@@ -333,106 +343,88 @@ void updateAll() {
     }
 
 }
-void resetForce(){
+
+void resetForce() {
     forceVector.resize(50);
     for (int i = 0; i < forceVector.size(); ++i) {
-        forceVector.at(i)=vec3(0,0,1);
+        forceVector.at(i) = vec3(0, 0, 1);
     }
 }
-void calculateAllForce(){
-    float force;
+
+void calculateAllForce() {
+    float force = 1;
     for (int i = 0; i < 50; ++i) {
         for (int j = i + 1; j < 50; ++j) {
 
-            float dist = distance(circles[i].getCenter(),circles[j].getCenter());
-            if(dist<0.0001)
-                printf("baj van %d %d",i,j);
+            float dist = distance(circles[i].getCenter(), circles[j].getCenter());
+            if (dist < 0.0001)
+                printf("baj van %d %d", i, j);
 
-           if(parban(i,j)){
-               force = sinhf(dist-0.5f);
-           }
-           else{
-               force= -1/dist/8;
-           }
-           float multiplier = force/dist/8; //ez nem biztos h jo igy
+            if (parban(i, j)) {
+                force = sinhf(dist - 1.0f);
+            } else {
+                force = -1 / dist / 8;
+            }
+            float multiplier = force / dist /8; //ez nem biztos h jo igy
 
-           forceVector.at(i) = hiperbolicTranslate(forceVector.at(i),circles[i].getCenter(),circles[j].getCenter(), multiplier);
-           forceVector.at(j) = hiperbolicTranslate(forceVector.at(j),circles[j].getCenter(),circles[i].getCenter(), multiplier);
-           forceVector[i].z=calcZ( forceVector[i].x, forceVector[i].y);
-            forceVector[j].z=calcZ( forceVector[j].x, forceVector[j].y);
+            forceVector.at(i) = hiperbolicTranslate(forceVector.at(i), circles[i].getCenter(), circles[j].getCenter(),
+                                                    multiplier);
+            forceVector.at(j) = hiperbolicTranslate(forceVector.at(j), circles[j].getCenter(), circles[i].getCenter(),
+                                                    multiplier);
+            forceVector[i].z = calcZ(forceVector[i].x, forceVector[i].y);
+            forceVector[j].z = calcZ(forceVector[j].x, forceVector[j].y);
 
         }
     }
 }
 
-void calculateAllCenters(){
+void calculateAllCenters() {
 
     for (int i = 0; i < 50; ++i) {
 
-        vec3 centerForce=hiperbolicTranslate(ORIGIN,circles[i].getCenter(),ORIGIN,1);
+        vec3 centerForce = hiperbolicTranslate(ORIGIN, circles[i].getCenter(), ORIGIN, 0.5);
+
+        speedVector.at(i) = hiperbolicTranslate(speedVector.at(i), ORIGIN, forceVector.at(i), 0.01);
+        speedVector.at(i).z = calcZ(speedVector.at(i).x, speedVector.at(i).y);
+
+        speedVector.at(i) = hiperbolicTranslate(speedVector.at(i), ORIGIN, centerForce, 0.01);
+        speedVector.at(i).z = calcZ(speedVector.at(i).x, speedVector.at(i).y);
 
 
-      // speedVector.at(i)= hiperbolicTranslate(speedVector.at(i),ORIGIN,forceVector.at(i),0.01);
-       speedVector.at(i).z= calcZ(speedVector.at(i).x,speedVector.at(i).y);
-
-        speedVector.at(i)= hiperbolicTranslate(speedVector.at(i),ORIGIN,centerForce,0.01);
-        speedVector.at(i).z= calcZ(speedVector.at(i).x,speedVector.at(i).y);
-
-
-       vec3 center= hiperbolicTranslate(circles[i].getCenter(),ORIGIN,speedVector.at(i),0.01);
-       circles[i].setCenter(vec2(center.x,center.y));
-
-
-
+        vec3 center = hiperbolicTranslate(circles[i].getCenter(), ORIGIN, speedVector.at(i), 0.01);
+        circles[i].setCenter(vec2(center.x, center.y));
 
 
     }
     updateAll();
 
 }
-void forceControll(){
+
+void forceControll() {
     resetForce();
     calculateAllForce();
     calculateAllCenters();
 }
 
 
+void heuristicGen() {
 
-vec2 heuristicGen(std::vector<vec2> centers) {
-    float x;
-    float y;
-    float nev = 0;
-    float szamx = 0;
-    float szamy = 0;
-    for (int i = 0; i < centers.size(); ++i) {
-        float m;
-        if (parban(i, centers.size())) {
-            m = 1;
-        } else {
-            m = 0.01;
-        }
-        szamx += centers.at(i).x*m;
-        szamy += centers.at(i).y*m;
-        nev += m;
-      //  if(nev <0){
-        //    nev= -nev;
-        //}
+    for (int i = 0; i < 50; ++i) {
+
+
+        vec3 center = hiperbolicTranslate(circles[i].getCenter(), circles[i].getCenter(), ORIGIN, 0.8);
+
+        circles[i].setCenter(vec2(center.x, center.y));
+        printf("%d %d %d",center.x,center.y,center.z);
+
 
     }
-    if (centers.size() == 0) {
-        x = ranFloat();
-        y = ranFloat();
-    } else {
-        x = szamx / nev;
-        y = szamy / nev;
-    }
-
-    return vec2(x, y);
+    updateAll();
 }
 
 
 void onInitialization() {
-  //  glEnable(GL_DEBUG_OUTPUT);
+    //  glEnable(GL_DEBUG_OUTPUT);
 
     srand(0);
 
@@ -444,13 +436,13 @@ void onInitialization() {
     speedVector.resize(50);
 
     for (int i = 0; i < speedVector.size(); ++i) {
-        speedVector.at(i)=vec3(0,0,1);
+        speedVector.at(i) = vec3(0, 0, 1);
     }
 
     for (int i = 0; i < 50; ++i) {
-        vec2 newCenter = heuristicGen(Centers);
-        Centers.push_back(newCenter);
-        circles[i].create(vec2(ranFloat(),ranFloat()) * 6 - vec2(3, 3));
+        // vec2 newCenter = heuristicGen(Centers);
+        //Centers.push_back(newCenter);
+        circles[i].create(vec2(ranFloat(), ranFloat()) * 6 - vec2(3, 3));
     }
 
     for (int i = 0; i < 61; ++i) {
@@ -484,13 +476,14 @@ void onDisplay() {
 
 // Key of ASCII code pressed
 void onKeyboard(unsigned char key, int pX, int pY) {
-  forceC=!forceC;// if d, invalidate display, i.e. redraw
+    forceC=!forceC;// if d, invalidate display, i.e. redraw
+    heuristicGen();
+    glutPostRedisplay();
 }
 
 // Key of ASCII code released
 void onKeyboardUp(unsigned char key, int pX, int pY) {
 }
-
 
 
 vec2 pos;
@@ -531,11 +524,11 @@ void onMouse(int button, int state, int pX,
 // Idle event indicating that some time elapsed: do animation here
 void onIdle() {
     long time = glutGet(GLUT_ELAPSED_TIME);
-    if(forceC){
-    for (int i = 0; i < 10; ++i) {
-        forceControll();
+    if (forceC) {
+        for (int i = 0; i < 10; ++i) {
+            forceControll();
 
-    }
+        }
     }
     glutPostRedisplay();
 }
