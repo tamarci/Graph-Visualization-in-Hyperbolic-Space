@@ -91,8 +91,8 @@ vec3 directionVector(vec3 p1, vec3 m, float distance) {
 
 float lorentzEq(vec3 p1, vec3 p2) {
     float a= p1.x * p2.x + p1.y * p2.y - p1.z * p2.z;
-    if (a>-1)
-        return -1.00001;
+    if (a>-1.0001)
+        return -1.0001;
     return a;
 }
 
@@ -318,6 +318,10 @@ std::vector<vec3> forceVector;
 std::vector<vec3> speedVector;
 bool forceC = false;
 
+constexpr float FRICTION =0.2;
+constexpr float CENTRAL =1;
+
+
 
 bool parban(int a, int b) {
 
@@ -333,7 +337,7 @@ bool parban(int a, int b) {
 void updateAll() {
 
     for (int i = 0; i < 50; ++i) {
-        // vec3 translatedCenter = hiperbolicTranslate(circles[i].getCenter(), q1, q2);
+
         circles[i].generateData();
     }
 
@@ -361,9 +365,9 @@ void calculateAllForce() {
                 printf("baj van %d %d", i, j);
 
             if (parban(i, j)) {
-                force = sinhf(dist - 1.0f);
+                force = sinhf(dist - 0.5f); // függvény +
             } else {
-                force = -1 / dist / 8;
+                force = -1 / dist / 5; //függvény -
             }
             float multiplier = force / dist /8; //ez nem biztos h jo igy
 
@@ -382,7 +386,7 @@ void calculateAllCenters() {
 
     for (int i = 0; i < 50; ++i) {
 
-        vec3 centerForce = hiperbolicTranslate(ORIGIN, circles[i].getCenter(), ORIGIN, 0.5);
+        vec3 centerForce = hiperbolicTranslate(ORIGIN, circles[i].getCenter(), ORIGIN, CENTRAL); // behuzerõ
 
         speedVector.at(i) = hiperbolicTranslate(speedVector.at(i), ORIGIN, forceVector.at(i), 0.01);
         speedVector.at(i).z = calcZ(speedVector.at(i).x, speedVector.at(i).y);
@@ -391,8 +395,16 @@ void calculateAllCenters() {
         speedVector.at(i).z = calcZ(speedVector.at(i).x, speedVector.at(i).y);
 
 
+        vec3 friction = hiperbolicTranslate(ORIGIN, circles[i].getCenter(), ORIGIN, FRICTION); //surlodas
+
         vec3 center = hiperbolicTranslate(circles[i].getCenter(), ORIGIN, speedVector.at(i), 0.01);
         circles[i].setCenter(vec2(center.x, center.y));
+
+        center = hiperbolicTranslate(circles[i].getCenter(), ORIGIN, friction, 0.01);
+        circles[i].setCenter(vec2(center.x, center.y));
+
+
+
 
 
     }
@@ -426,7 +438,7 @@ void heuristicGen() {
 void onInitialization() {
     //  glEnable(GL_DEBUG_OUTPUT);
 
-    srand(0);
+  //  srand(0);
 
     glViewport(0, 0, windowWidth, windowHeight);
     glLineWidth(2.0f);
@@ -476,9 +488,11 @@ void onDisplay() {
 
 // Key of ASCII code pressed
 void onKeyboard(unsigned char key, int pX, int pY) {
-    forceC=!forceC;// if d, invalidate display, i.e. redraw
+    if(key==' '){
+        forceC=true;// if d, invalidate display, i.e. redraw
     heuristicGen();
     glutPostRedisplay();
+    }
 }
 
 // Key of ASCII code released

@@ -88,7 +88,7 @@
       <workItem from="1616278538021" duration="12996000" />
       <workItem from="1616362584920" duration="6927000" />
       <workItem from="1616419767458" duration="18346000" />
-      <workItem from="1616491226310" duration="45682000" />
+      <workItem from="1616491226310" duration="49910000" />
     </task>
     <task id="LOCAL-00001" summary="textura">
       <created>1616363104516</created>
@@ -125,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616589992861</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="erők és heurisztika v1">
+      <created>1616605648089</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1616605648089</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +158,7 @@
     <MESSAGE value="javitasok" />
     <MESSAGE value="yeesss erok" />
     <MESSAGE value="debug feltolt" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug feltolt" />
+    <MESSAGE value="erők és heurisztika v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="erők és heurisztika v1" />
   </component>
 </project>
