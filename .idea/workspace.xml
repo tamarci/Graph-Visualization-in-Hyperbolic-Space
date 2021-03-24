@@ -13,7 +13,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e63016b-a2e2-4837-8485-7354a0ee60d9" name="Default Changelist" comment="">
+    <list default="true" id="4e63016b-a2e2-4837-8485-7354a0ee60d9" name="Default Changelist" comment="yeesss erok">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Skeleton.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Skeleton.cpp" afterDir="false" />
     </list>
@@ -88,7 +88,7 @@
       <workItem from="1616278538021" duration="12996000" />
       <workItem from="1616362584920" duration="6927000" />
       <workItem from="1616419767458" duration="18346000" />
-      <workItem from="1616491226310" duration="30574000" />
+      <workItem from="1616491226310" duration="36138000" />
     </task>
     <task id="LOCAL-00001" summary="textura">
       <created>1616363104516</created>
@@ -111,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616532590798</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="yeesss erok">
+      <created>1616548771989</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616548771990</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,7 +142,8 @@
     <MESSAGE value="textura" />
     <MESSAGE value="erők kezdete" />
     <MESSAGE value="javitasok" />
-    <option name="LAST_COMMIT_MESSAGE" value="javitasok" />
+    <MESSAGE value="yeesss erok" />
+    <option name="LAST_COMMIT_MESSAGE" value="yeesss erok" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

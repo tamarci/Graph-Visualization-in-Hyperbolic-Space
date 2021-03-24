@@ -82,11 +82,11 @@ vec2 movingVector(0, 0);
 
 
 vec3 segmentEq(vec3 p1, vec3 dv, float distance) {
-    return p1 * std::cosh(distance) + dv * std::sinh(distance);
+    return p1 * coshf(distance) + dv * sinhf(distance);
 }
 
 vec3 directionVector(vec3 p1, vec3 m, float distance) {
-    return (m - p1 * std::cosh(distance)) / std::sinh(distance);
+    return (m - p1 * coshf(distance)) /sinhf(distance);
 }
 
 float lorentzEq(vec3 p1, vec3 p2) {
@@ -124,7 +124,7 @@ float ranFloat() {
 }
 
 float calcZ(float x, float y){
-    return sqrt(x *x + y* y + 1);
+    return sqrtf(x *x + y* y + 1);
 }
 
 class Circle {
@@ -161,8 +161,8 @@ public:
 
         vec2 textureUVCoordinates[20];
         for (int i = 0; i < 20; ++i) {
-            float x = (std::cos(i * 2 * PI / 20) + 1) / 2;
-            float y = (std::sin(i * 2 * PI / 20) + 1) / 2;
+            float x = (cosf(i * 2 * PI / 20) + 1) / 2;
+            float y = (sinf(i * 2 * PI / 20) + 1) / 2;
             textureUVCoordinates[i] = vec2(x, y);
         }
         glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
@@ -194,8 +194,8 @@ public:
 
         for (int i = 0; i < 20; i++) {
 
-            float x = (radius * std::cos(i * 2 * PI / 20));
-            float y = (radius * std::sin(i * 2 * PI / 20));
+            float x = (radius * cosf(i * 2 * PI / 20));
+            float y = (radius * sinf(i * 2 * PI / 20));
             float z = calcZ(x,y);
             vec3 translatedP = hiperbolicTranslate(vec3(x, y, z), ORIGIN, center);
 
@@ -219,7 +219,7 @@ public:
     }
 
 };
-
+//dögöljön meg a tulipán, hulljanak le a ...
 class Edge {
     unsigned int vao, vbo;
 //velocity állandó
@@ -251,7 +251,7 @@ public:
 
     void updateCenter(vec3 center1, vec3 center2) {
         vec3 mouseOffset3{movingVector.x, movingVector.y,
-                          sqrt(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
+                          sqrtf(movingVector.x * movingVector.x + movingVector.y * movingVector.y + 1)};
 
         vec3 translatedCenter1 = hiperbolicTranslate(center1, ORIGIN, mouseOffset3,1);
         vec3 translatedCenter2 = hiperbolicTranslate(center2, ORIGIN, mouseOffset3,1);
@@ -349,14 +349,13 @@ void calculateAllForce(){
                 printf("baj van %d %d",i,j);
 
            if(parban(i,j)){
-               force = std::sinh(dist-0.5f);
+               force = sinhf(dist-0.5f);
            }
            else{
                force= -1/dist/8;
            }
-           float multiplier = force/dist/1000; //ez nem biztos h jo igy
-           if(i==3)
-               printf("");
+           float multiplier = force/dist/8; //ez nem biztos h jo igy
+
            forceVector.at(i) = hiperbolicTranslate(forceVector.at(i),circles[i].getCenter(),circles[j].getCenter(), multiplier);
            forceVector.at(j) = hiperbolicTranslate(forceVector.at(j),circles[j].getCenter(),circles[i].getCenter(), multiplier);
            forceVector[i].z=calcZ( forceVector[i].x, forceVector[i].y);
@@ -370,12 +369,14 @@ void calculateAllCenters(){
 
     for (int i = 0; i < 50; ++i) {
 
+        vec3 centerForce=hiperbolicTranslate(ORIGIN,circles[i].getCenter(),ORIGIN,1);
 
-        forceVector.at(i)=hiperbolicTranslate(ORIGIN,circles[i].getCenter(),ORIGIN,1);
 
-
-       speedVector.at(i)= hiperbolicTranslate(speedVector.at(i),ORIGIN,forceVector.at(i),0.01);
+      // speedVector.at(i)= hiperbolicTranslate(speedVector.at(i),ORIGIN,forceVector.at(i),0.01);
        speedVector.at(i).z= calcZ(speedVector.at(i).x,speedVector.at(i).y);
+
+        speedVector.at(i)= hiperbolicTranslate(speedVector.at(i),ORIGIN,centerForce,0.01);
+        speedVector.at(i).z= calcZ(speedVector.at(i).x,speedVector.at(i).y);
 
 
        vec3 center= hiperbolicTranslate(circles[i].getCenter(),ORIGIN,speedVector.at(i),0.01);
@@ -383,9 +384,7 @@ void calculateAllCenters(){
 
 
 
-       //velocityre és centerekre is ez
-       //valahol z-t frissiteni
-       // surlodas és milyen idovezerles kell
+
 
     }
     updateAll();
@@ -433,7 +432,7 @@ vec2 heuristicGen(std::vector<vec2> centers) {
 
 
 void onInitialization() {
-    glEnable(GL_DEBUG_OUTPUT);
+  //  glEnable(GL_DEBUG_OUTPUT);
 
     srand(0);
 
@@ -451,7 +450,7 @@ void onInitialization() {
     for (int i = 0; i < 50; ++i) {
         vec2 newCenter = heuristicGen(Centers);
         Centers.push_back(newCenter);
-        circles[i].create(vec2(ranFloat(),ranFloat()) * 2 - vec2(1, 1));
+        circles[i].create(vec2(ranFloat(),ranFloat()) * 6 - vec2(3, 3));
     }
 
     for (int i = 0; i < 61; ++i) {
