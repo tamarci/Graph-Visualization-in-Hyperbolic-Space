@@ -136,6 +136,10 @@ class Circle {
 
 public:
     vec3 getCenter() { return center; }
+    void setCenter(vec2 c) {center=c;
+        center.z= calcZ(c.x,c.y);
+
+        }
 
     void create(vec2 center) {
         glGenVertexArrays(1, &vao);
@@ -192,7 +196,7 @@ public:
 
             float x = (radius * std::cos(i * 2 * PI / 20));
             float y = (radius * std::sin(i * 2 * PI / 20));
-            float z = sqrt(x * x + y * y + 1);
+            float z = calcZ(x,y);
             vec3 translatedP = hiperbolicTranslate(vec3(x, y, z), ORIGIN, center);
 
             translatedP = hiperbolicTranslate(translatedP, ORIGIN, mv3, 1);
@@ -303,6 +307,7 @@ std::vector<vec2> edgePairs = shuffledEdgeGen();
 Edge edges[61];
 std::vector<vec3> forceVector;
 std::vector<vec3> speedVector;
+bool forceC=false;
 
 
 bool parban(int a, int b) {
@@ -315,7 +320,19 @@ bool parban(int a, int b) {
     return false;
 
 }
+void updateAll() {
 
+    for (int i = 0; i < 50; ++i) {
+        // vec3 translatedCenter = hiperbolicTranslate(circles[i].getCenter(), q1, q2);
+        circles[i].generateData();
+    }
+
+    for (int i = 0; i < 61; ++i) {
+        edges[i].updateCenter(circles[(int) edgePairs[i].x].getCenter(), circles[(int) edgePairs[i].y].getCenter());
+
+    }
+
+}
 void resetForce(){
     forceVector.resize(50);
     for (int i = 0; i < forceVector.size(); ++i) {
@@ -326,27 +343,44 @@ void calculateAllForce(){
     float force;
     for (int i = 0; i < 50; ++i) {
         for (int j = i + 1; j < 50; ++j) {
+
             float dist = distance(circles[i].getCenter(),circles[j].getCenter());
+            if(dist<0.0001)
+                printf("baj van %d %d",i,j);
+
            if(parban(i,j)){
                force = std::sinh(dist-0.5f);
            }
            else{
                force= -1/dist/8;
            }
-           float multiplier = force/dist; //ez nem biztos h jo igy
+           float multiplier = force/dist/1000; //ez nem biztos h jo igy
+           if(i==3)
+               printf("");
            forceVector.at(i) = hiperbolicTranslate(forceVector.at(i),circles[i].getCenter(),circles[j].getCenter(), multiplier);
-            forceVector.at(j) = hiperbolicTranslate(forceVector.at(j),circles[j].getCenter(),circles[i].getCenter(), multiplier);
+           forceVector.at(j) = hiperbolicTranslate(forceVector.at(j),circles[j].getCenter(),circles[i].getCenter(), multiplier);
+           forceVector[i].z=calcZ( forceVector[i].x, forceVector[i].y);
+            forceVector[j].z=calcZ( forceVector[j].x, forceVector[j].y);
+
         }
     }
 }
 
 void calculateAllCenters(){
-    float forceDist,velocityDist,circleDist;
-    vec3 forceTranslate,velocityTranslate,circleTranslate;
+
     for (int i = 0; i < 50; ++i) {
-       forceDist=distance(circles[i].getCenter(),ORIGIN);
-       //forceTranslate= translate();
-       speedVector.at(i)= hiperbolicTranslate(circles[i].getCenter(),ORIGIN,forceVector.at(i),0.01);
+
+
+        forceVector.at(i)=hiperbolicTranslate(ORIGIN,circles[i].getCenter(),ORIGIN,1);
+
+
+       speedVector.at(i)= hiperbolicTranslate(speedVector.at(i),ORIGIN,forceVector.at(i),0.01);
+       speedVector.at(i).z= calcZ(speedVector.at(i).x,speedVector.at(i).y);
+
+
+       vec3 center= hiperbolicTranslate(circles[i].getCenter(),ORIGIN,speedVector.at(i),0.01);
+       circles[i].setCenter(vec2(center.x,center.y));
+
 
 
        //velocityre és centerekre is ez
@@ -354,8 +388,16 @@ void calculateAllCenters(){
        // surlodas és milyen idovezerles kell
 
     }
+    updateAll();
 
 }
+void forceControll(){
+    resetForce();
+    calculateAllForce();
+    calculateAllCenters();
+}
+
+
 
 vec2 heuristicGen(std::vector<vec2> centers) {
     float x;
@@ -393,6 +435,7 @@ vec2 heuristicGen(std::vector<vec2> centers) {
 void onInitialization() {
     glEnable(GL_DEBUG_OUTPUT);
 
+    srand(0);
 
     glViewport(0, 0, windowWidth, windowHeight);
     glLineWidth(2.0f);
@@ -401,10 +444,14 @@ void onInitialization() {
     forceVector.resize(50);
     speedVector.resize(50);
 
+    for (int i = 0; i < speedVector.size(); ++i) {
+        speedVector.at(i)=vec3(0,0,1);
+    }
+
     for (int i = 0; i < 50; ++i) {
         vec2 newCenter = heuristicGen(Centers);
         Centers.push_back(newCenter);
-        circles[i].create(vec2(ranFloat(),ranFloat()) * 6 - vec2(3, 3));
+        circles[i].create(vec2(ranFloat(),ranFloat()) * 2 - vec2(1, 1));
     }
 
     for (int i = 0; i < 61; ++i) {
@@ -438,26 +485,14 @@ void onDisplay() {
 
 // Key of ASCII code pressed
 void onKeyboard(unsigned char key, int pX, int pY) {
-    if (key == 'd') glutPostRedisplay();         // if d, invalidate display, i.e. redraw
+  forceC=!forceC;// if d, invalidate display, i.e. redraw
 }
 
 // Key of ASCII code released
 void onKeyboardUp(unsigned char key, int pX, int pY) {
 }
 
-void updateAll() {
 
-    for (int i = 0; i < 50; ++i) {
-        // vec3 translatedCenter = hiperbolicTranslate(circles[i].getCenter(), q1, q2);
-        circles[i].generateData();
-    }
-
-    for (int i = 0; i < 61; ++i) {
-        edges[i].updateCenter(circles[(int) edgePairs[i].x].getCenter(), circles[(int) edgePairs[i].y].getCenter());
-
-    }
-
-}
 
 vec2 pos;
 vec2 oldPos(0, 0);
@@ -496,5 +531,12 @@ void onMouse(int button, int state, int pX,
 
 // Idle event indicating that some time elapsed: do animation here
 void onIdle() {
-    long time = glutGet(GLUT_ELAPSED_TIME); // elapsed time since the start of the program
+    long time = glutGet(GLUT_ELAPSED_TIME);
+    if(forceC){
+    for (int i = 0; i < 10; ++i) {
+        forceControll();
+
+    }
+    }
+    glutPostRedisplay();
 }

@@ -88,7 +88,7 @@
       <workItem from="1616278538021" duration="12996000" />
       <workItem from="1616362584920" duration="6927000" />
       <workItem from="1616419767458" duration="18346000" />
-      <workItem from="1616491226310" duration="19905000" />
+      <workItem from="1616491226310" duration="30574000" />
     </task>
     <task id="LOCAL-00001" summary="textura">
       <created>1616363104516</created>
@@ -104,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616520732641</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="javitasok">
+      <created>1616532590798</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1616532590798</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,12 +134,13 @@
     <MESSAGE value="z" />
     <MESSAGE value="textura" />
     <MESSAGE value="erők kezdete" />
-    <option name="LAST_COMMIT_MESSAGE" value="erők kezdete" />
+    <MESSAGE value="javitasok" />
+    <option name="LAST_COMMIT_MESSAGE" value="javitasok" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
-        <watch expression="isnan(translatedP.x)== true" language="ObjectiveC" />
+        <watch expression="forceVector" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
